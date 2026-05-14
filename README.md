@@ -2,7 +2,7 @@
 
 **Stack:** React + Vite + Tailwind + Axios  
 **Deploy:** Vercel  
-**URL:** `https://seu-projeto.vercel.app`
+**URL:** `https://in100tiva-front.vercel.app/`
 
 ---
 
@@ -65,7 +65,7 @@ VITE_API_URL=http://localhost:3000
 
 **Em Vercel:**
 ```
-VITE_API_URL=https://seu-backend.onrender.com
+VITE_API_URL=https://in100tivaback.onrender.com
 ```
 
 ---
