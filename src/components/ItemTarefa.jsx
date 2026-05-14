@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000",
 });
 
 export default function ItemTarefa({
@@ -32,13 +32,11 @@ export default function ItemTarefa({
     }
 
     try {
-      // Tenta criar um Date object
       const dataObj = new Date(data);
 
       console.log("Data object:", dataObj);
       console.log("Timestamp válido?", dataObj.getTime());
 
-      // Verifica se é válida
       if (isNaN(dataObj.getTime())) {
         console.error("Data inválida - NaN");
         return "Data inválida";
@@ -69,7 +67,6 @@ export default function ItemTarefa({
     return cores[status] || "bg-gray-100 text-gray-800";
   };
 
-  // Marcar/desmarcar como concluído
   const handleCheckbox = async (e) => {
     const novoStatus = e.target.checked ? "concluído" : "a fazer";
     setMarcada(e.target.checked);
@@ -92,7 +89,6 @@ export default function ItemTarefa({
     }
   };
 
-  // Deletar tarefa
   const handleDeletar = async () => {
     if (window.confirm("Tem certeza que deseja deletar esta tarefa?")) {
       try {
@@ -111,7 +107,6 @@ export default function ItemTarefa({
     }
   };
 
-  // Salvar edição
   const handleSalvarEdicao = async () => {
     if (!editTitulo.trim()) {
       alert("O título não pode estar vazio");
@@ -139,7 +134,6 @@ export default function ItemTarefa({
     }
   };
 
-  // Se está editando
   if (editando) {
     return (
       <div className="bg-white rounded-lg shadow-md border border-slate-200 p-4 mb-4">
@@ -207,14 +201,12 @@ export default function ItemTarefa({
     );
   }
 
-  // Exibir tarefa
   return (
     <div
       className={`bg-white rounded-lg shadow-md border border-slate-200 p-4 mb-4 flex items-start gap-4 transition ${
         marcada ? "opacity-70" : ""
       }`}
     >
-      {/* Checkbox */}
       <input
         type="checkbox"
         checked={marcada}
@@ -223,7 +215,6 @@ export default function ItemTarefa({
         className="w-5 h-5 mt-1 cursor-pointer flex-shrink-0"
       />
 
-      {/* Conteúdo */}
       <div className="flex-1">
         <h3
           className={`text-lg font-semibold mb-2 ${
@@ -247,7 +238,6 @@ export default function ItemTarefa({
         </div>
       </div>
 
-      {/* Botões de ação */}
       <div className="flex gap-2 flex-shrink-0">
         <button
           onClick={() => setEditando(true)}

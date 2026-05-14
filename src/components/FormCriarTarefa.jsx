@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000",
 });
 
 export default function FormCriarTarefa({ onTarefaCriada }) {
@@ -15,7 +15,7 @@ export default function FormCriarTarefa({ onTarefaCriada }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validação
+   
     if (!novoTitulo.trim()) {
       setMensagem({
         tipo: "erro",
@@ -36,12 +36,10 @@ export default function FormCriarTarefa({ onTarefaCriada }) {
 
       console.log("Tarefa criada:", response.data);
 
-      // Chamar callback para atualizar a lista de tarefas
       if (onTarefaCriada) {
         onTarefaCriada(response.data.tarefa || response.data);
       }
 
-      // Limpar formulário
       setNovoTitulo("");
       setNovaDescricao("");
       setNovoStatus("a fazer");
@@ -51,7 +49,6 @@ export default function FormCriarTarefa({ onTarefaCriada }) {
         texto: "✅ Tarefa criada com sucesso!",
       });
 
-      // Remover mensagem após 3 segundos
       setTimeout(() => setMensagem(null), 3000);
     } catch (error) {
       console.error("Erro ao criar tarefa:", error);
@@ -71,9 +68,7 @@ export default function FormCriarTarefa({ onTarefaCriada }) {
       </h2>
 
       <form onSubmit={handleSubmit}>
-        {/* Título e Status em grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-          {/* Título */}
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-slate-700 mb-2">
               Título *
@@ -88,7 +83,6 @@ export default function FormCriarTarefa({ onTarefaCriada }) {
             />
           </div>
 
-          {/* Status */}
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-2">
               Status
@@ -106,7 +100,6 @@ export default function FormCriarTarefa({ onTarefaCriada }) {
           </div>
         </div>
 
-        {/* Descrição */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-slate-700 mb-2">
             Descrição (opcional)
@@ -121,7 +114,6 @@ export default function FormCriarTarefa({ onTarefaCriada }) {
           />
         </div>
 
-        {/* Mensagens */}
         {mensagem && (
           <div
             className={`mb-4 p-3 rounded-lg text-sm font-medium ${
@@ -134,7 +126,6 @@ export default function FormCriarTarefa({ onTarefaCriada }) {
           </div>
         )}
 
-        {/* Botão */}
         <div className="flex items-center gap-4">
           <button
             type="submit"
