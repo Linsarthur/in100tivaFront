@@ -3,7 +3,8 @@
 **Stack:** React + Vite + Tailwind + Axios  
 **Deploy:** Vercel  
 **URL:** `https://in100tiva-front.vercel.app/`
-REPOSITÓRIO BACK-END: https://github.com/Linsarthur/in100tivaBack
+
+**REPOSITÓRIO BACK-END:** https://github.com/Linsarthur/in100tivaBack
 ---
 
 ## 📁 Estrutura
